@@ -1,4 +1,4 @@
-package com.data2.flink.j.order.file;
+package com.data2.flink.j.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileOrderDO {
+public class OrderDO {
     private String orderId;
 
     /**

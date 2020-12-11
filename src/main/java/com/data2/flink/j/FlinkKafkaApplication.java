@@ -1,5 +1,9 @@
 package com.data2.flink.j;
 
+import com.data2.flink.j.order.OrderDO;
+import com.data2.flink.j.order.fun.OrderFilterFunction;
+import com.data2.flink.j.order.fun.OrderMapFuntion;
+import com.data2.flink.j.order.fun.OrderSinkFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -17,9 +21,9 @@ import java.util.Properties;
  */
 @Slf4j
 @SpringBootApplication
-public class FlinkJApplication {
+public class FlinkKafkaApplication {
     public static void main(String[] args) {
-        SpringApplication.run(FlinkJApplication.class);
+        SpringApplication.run(FlinkKafkaApplication.class);
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
@@ -36,14 +40,13 @@ public class FlinkJApplication {
         ).name("FlinkKafkaConsumer010: FlinkJob");
 
         // 对数据源进行过滤
-        DataStream<Object> transformedEvent =
-                text.filter(new FlinkTransformer.Filter())
-                        .map(new FlinkTransformer.Map());
+        DataStream<OrderDO> transformedEvent =
+                text.map(new OrderMapFuntion()).filter(new OrderFilterFunction());
 
         // 设置执行并行度
         transformedEvent.getExecutionConfig().setParallelism(1);
         // 设置数据持久的类
-        transformedEvent.addSink(new FlinkSink());
+        transformedEvent.addSink(new OrderSinkFunction());
         // execute program
         try {
             env.execute("FlinkJob");

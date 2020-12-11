@@ -1,6 +1,6 @@
-package com.data2.flink.j.order.file;
+package com.data2.flink.j.order.fun;
 
-import com.alibaba.fastjson.JSON;
+import com.data2.flink.j.order.OrderDO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
@@ -11,7 +11,7 @@ import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
  * @date 2020/12/11 下午5:23
  */
 @Slf4j
-public class OrderFileSinkFunction extends RichSinkFunction<FileOrderDO> {
+public class OrderSinkFunction extends RichSinkFunction<OrderDO> {
 
     @Override
     public void close() {
@@ -23,7 +23,7 @@ public class OrderFileSinkFunction extends RichSinkFunction<FileOrderDO> {
     }
 
     @Override
-    public void invoke(FileOrderDO value, Context context) {
+    public void invoke(OrderDO value, Context context) {
         // 已支付未交付， 重发重试
         // 话费充值 ，重新调用上账接口
         if (value != null && "1".equals(value.getOrderStatus())){
