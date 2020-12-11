@@ -14,8 +14,7 @@ import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 public class OrderFileSinkFunction extends RichSinkFunction<FileOrderDO> {
 
     @Override
-    public void close() throws Exception {
-        super.close();
+    public void close() {
     }
 
     @Override
