@@ -1,0 +1,8 @@
+{"date":1607755218530,"itemDirectoryId":"1","itemId":"1001","type":"pv","userId":"123131"}
+{"date":1607755218530,"itemDirectoryId":"1","itemId":"1001","type":"pv","userId":"565778"}
+{"date":1607755218530,"itemDirectoryId":"2","itemId":"2001","type":"pv","userId":"878999"}
+{"date":1607755218530,"itemDirectoryId":"2","itemId":"2002","type":"pv","userId":"666565"}
+{"date":1607755218530,"itemDirectoryId":"2","itemId":"2003","type":"pv","userId":"885855"}
+{"date":1607755218530,"itemDirectoryId":"2","itemId":"2004","type":"pv","userId":"097979"}
+{"date":1607755218530,"itemDirectoryId":"1","itemId":"1001","type":"buy","userId":"666666"}
+{"date":1607755218530,"itemDirectoryId":"2","itemId":"2001","type":"buy","userId":"888988"}

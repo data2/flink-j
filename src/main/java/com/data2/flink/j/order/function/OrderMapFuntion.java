@@ -1,4 +1,4 @@
-package com.data2.flink.j.order.fun;
+package com.data2.flink.j.order.function;
 
 import com.alibaba.fastjson.JSON;
 import com.data2.flink.j.order.OrderDO;

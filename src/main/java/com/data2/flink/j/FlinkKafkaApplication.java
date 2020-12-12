@@ -1,9 +1,9 @@
 package com.data2.flink.j;
 
 import com.data2.flink.j.order.OrderDO;
-import com.data2.flink.j.order.fun.OrderFilterFunction;
-import com.data2.flink.j.order.fun.OrderMapFuntion;
-import com.data2.flink.j.order.fun.OrderSinkFunction;
+import com.data2.flink.j.order.function.OrderFilterFunction;
+import com.data2.flink.j.order.function.OrderMapFuntion;
+import com.data2.flink.j.order.function.OrderSinkFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.DataStream;
