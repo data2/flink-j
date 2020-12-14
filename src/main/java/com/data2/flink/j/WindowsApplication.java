@@ -12,6 +12,7 @@ import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
 import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
 import org.apache.flink.streaming.api.windowing.time.Time;
@@ -58,7 +59,7 @@ public class WindowsApplication {
                     Item item = items.get(random.nextInt(6));
                     String userId = String.valueOf(random.nextInt(10));
                     sourceContext.collect(new UserBehavior(userId, item.getItemId(), item.getItemDirectory(), "pv", new Date()));
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                 }
             }
 
@@ -111,9 +112,14 @@ public class WindowsApplication {
                         collector.collect(new ItemViewCount(aLong, timeWindow.getEnd(), iterable.iterator().next()));
                     }
                 })
-                .keyBy(itemViewCount -> itemViewCount.getItemId())
-                .print();// 每个商品在每个窗口的点击量的数据流
-
+//                .print();// 每个商品在每个窗口的点击量的数据流
+                .keyBy(itemViewCount -> itemViewCount.getWindowEnd())
+                .process(new KeyedProcessFunction<Long, ItemViewCount, Object>() {
+                    @Override
+                    public void processElement(ItemViewCount itemViewCount, Context context, Collector<Object> collector) throws Exception {
+                        log.info("窗口：{}，商品：{}，销量：{}",itemViewCount.getWindowEnd(), itemViewCount.getItemId(), itemViewCount.getCount());
+                    }
+                });
 
         // 启动
         env.execute("test");
